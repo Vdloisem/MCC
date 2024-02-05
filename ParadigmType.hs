@@ -7,10 +7,11 @@ type ObservableNondeterminism = Bool
 type MetaParadigm = String
 
 data Paradigm = Paradigm {
+    name :: ParadigmName,
     concepts :: [Concept],
     parents :: [ParadigmName],
     children :: [ParadigmName],
     turingComplete :: TuringCompleteness,
     observableND :: ObservableNondeterminism,
     metaParadigm :: MetaParadigm
-} deriving (Show)
+} deriving (Eq, Show)
