@@ -3,6 +3,10 @@ module MetricFunctions where
 import ParadigmType
 import Control.Monad (forM_)
 
+-- Génère toutes les combinaisons possibles de deux éléments d'une liste
+combinations :: Eq a => [a] -> [(a, a)]
+combinations list = [(x, y) | x <- list, y <- list, x /= y]
+
 -- Calcule l'intersection des caractéristiques (I)
 intersection :: (Eq a) => [a] -> [a] -> [a]
 intersection xs ys = [x | x <- xs, x `elem` ys]
@@ -52,7 +56,28 @@ mcFunction c1 c2 f1 f2 ch1 ch2 t1 t2 o1 o2 m1 m2 alpha beta gamma delta epsilon 
     putStrLn $ "Total MC Value: " ++ show mcResult
     putStrLn $ "-------------------------------------------------------------------------------------------------------"
 
--- Fonction d'aide 
+-- Formater les résultats pour le CSV
+mcFunctionCSV :: Paradigm -> Paradigm -> IO String
+mcFunctionCSV p1 p2 = do
+    let (c1, c2) = (concepts p1, concepts p2)
+    let (f1, f2) = (parents p1, parents p2)
+    let (ch1, ch2) = (children p1, children p2)
+    let (t1, t2) = (turingComplete p1, turingComplete p2)
+    let (o1, o2) = (observableND p1, observableND p2)
+    let (m1, m2) = (metaParadigm p1, metaParadigm p2)
+
+    let iResult = (1/6) * iFunction c1 c2
+    let r1Result = (1/6) * rFunction f1 ch2
+    let r2Result = (1/6) * rFunction f2 ch1
+    let mResult = (1/6) * mFunction m1 m2
+    let tcResult = (1/6) * tcFunction t1 t2
+    let ndoResult = (1/6) * ndoFunction o1 o2
+    let mcResult = iResult + r1Result + r2Result + mResult + tcResult + ndoResult
+
+    -- Retourner une ligne formatée pour le CSV
+    return $ name p1 ++ "," ++ name p2 ++ "," ++ show iResult ++ "," ++ show r1Result ++ "," ++ show r2Result ++ "," ++ show mResult ++ "," ++ show tcResult ++ "," ++ show ndoResult ++ "," ++ show mcResult
+
+-- Calcule la métrique MC pour deux paradigmes
 calculateMC :: Paradigm -> Paradigm -> IO ()
 calculateMC p1 p2 = mcFunction
     (concepts p1) (concepts p2)
@@ -64,14 +89,26 @@ calculateMC p1 p2 = mcFunction
     (1/6) (1/6) (1/6) (1/6) (1/6) (1/6)
     (name p1) (name p2)
 
--- Génère toutes les combinaisons possibles de deux éléments d'une liste
-combinations :: Eq a => [a] -> [(a, a)]
-combinations list = [(x, y) | x <- list, y <- list, x /= y]
-
--- Calcule la métrique pour chaque combinaison de paradigmes
+-- Calcule la métrique MC pour chaque combinaison de paradigmes
 calculateMCForAll :: [Paradigm] -> IO ()
 calculateMCForAll paradigms = do
     let pairs = combinations paradigms
     forM_ pairs $ \(p1, p2) -> do
         putStrLn $ "Calculating MC between: " ++ name p1 ++ " and " ++ name p2
         calculateMC p1 p2
+
+-- Fonction modifiée pour calculer MC pour toutes les combinaisons et écrire dans un fichier CSV
+calculateMCForAllCSV :: [Paradigm] -> FilePath -> IO ()
+calculateMCForAllCSV paradigms filePath = do
+    let pairs = combinations paradigms
+    results <- mapM (uncurry mcFunctionCSV) pairs
+    writeResultsToCSV filePath results
+
+-- Fonction pour écrire les résultats dans un fichier CSV
+writeResultsToCSV :: FilePath -> [String] -> IO ()
+writeResultsToCSV filePath results = do
+    let header = "Paradigm1,Paradigm2,I,R1,R2,M,TC,NDO,TotalMC\n"
+    let csvData = header ++ unlines results
+    writeFile filePath csvData
+
+
