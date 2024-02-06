@@ -2,7 +2,7 @@ module ParadigmData where
 
 import ParadigmType
 
--- L1 Paradigms
+-- L1 Paradigms (checked)
 descriptiveDeclarativeProgramming :: Paradigm
 descriptiveDeclarativeProgramming = Paradigm {
     name = "descriptive declarative programming",
@@ -14,7 +14,7 @@ descriptiveDeclarativeProgramming = Paradigm {
     metaParadigm = "functional"
 }
 
--- L2 Paradigms
+-- L2 Paradigms (checked)
 firstOrderFunctionalProgramming :: Paradigm
 firstOrderFunctionalProgramming = Paradigm {
     name = "first-order functional programming",
@@ -26,7 +26,7 @@ firstOrderFunctionalProgramming = Paradigm {
     metaParadigm = "functional"
 }
 
--- L3 Paradigms
+-- L3 Paradigms (checked)
 functionalProgramming :: Paradigm
 functionalProgramming = Paradigm {
     name = "functional programming",
@@ -53,7 +53,7 @@ imperativeProgramming = Paradigm {
     metaParadigm = "shared state"
 }
 
--- L4 Paradigms
+-- L4 Paradigms (checked)
 deterministicLogicProgramming :: Paradigm
 deterministicLogicProgramming = Paradigm {
     name = "deterministic logic programming",
@@ -103,7 +103,7 @@ eventLoopProgramming = Paradigm {
     name = "event loop programming",
     concepts = ["record", "procedure", "closure", "channel"],
     parents = ["functional programming", "event loop programming"],
-    children = ["event loop programming", "multi-agent programming", "message passing concurrent programming"],
+    children = ["event loop programming", "multi agent programming"],
     turingComplete = True,
     observableND = False,
     metaParadigm = "message passing"
@@ -153,7 +153,7 @@ sequentialObjectOrientedProgramming = Paradigm {
     metaParadigm = "shared state"
 }
 
--- L5 Paradigms
+-- L5 Paradigms (checked)
 
 relationalAndLogicProgramming :: Paradigm
 relationalAndLogicProgramming = Paradigm {
@@ -232,7 +232,7 @@ concurrentObjectOrientedProgramming = Paradigm {
     metaParadigm = "shared state"
 }
 
--- L6 Paradigms
+-- L6 Paradigms (checked)
 constraintLogicProgramming :: Paradigm
 constraintLogicProgramming = Paradigm {
     name = "constraint logic programming",
@@ -281,14 +281,14 @@ activeObjectProgramming :: Paradigm
 activeObjectProgramming = Paradigm {
     name = "active object programming",
     concepts = ["record", "procedure", "closure", "channel", "thread", "local cell"],
-    parents = ["multi agent programming", "message passing concurrent programming","active object programming"],
+    parents = ["multi agent programming","active object programming"],
     children = ["active object programming"],
     turingComplete = True,
     observableND = True,
     metaParadigm = "message passing"
 }
 
--- L7 Paradigms
+-- L7 Paradigms (checked)
 
 concurrentConstraintProgramming :: Paradigm
 concurrentConstraintProgramming = Paradigm {
@@ -329,7 +329,7 @@ discreteSynchronousProgramming :: Paradigm
 discreteSynchronousProgramming = Paradigm {
     name = "discrete synchronous programming",
     concepts = ["record", "procedure", "closure", "thread", "single assign", "nondet choice", "sync on partial termination", "clocked computation"],
-    parents = ["functional reactive programming", "continuous synchronous programming","discrete synchronous programming"],
+    parents = ["continuous synchronous programming","discrete synchronous programming"],
     children = ["discrete synchronous programming"],
     turingComplete = True,
     observableND = False,
