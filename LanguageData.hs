@@ -116,34 +116,8 @@ smalltalk :: Language
 smalltalk = Language "Smalltalk" [concurrentObjectOrientedProgramming]
 
 languages :: [Language]
-languages = [xml, 
-             sexpression,
-             scheme, 
-             ml, 
-             prolog, 
-             clp, 
-             life, 
-             akl, 
-             oz, 
-             alice, 
-             pcurry, 
-             hasKell, 
-             pipes, 
-             e, 
-             fcp, 
-             frTime, 
-             esterel, 
-             clu, 
-             oCaml, 
-             erlang, 
-             csp, 
-             occam, 
-             pascal, 
-             c, 
-             dijkstraGCL, 
-             snobol, 
-             icon, 
-             java, 
-             cplusplus, 
-             smalltalk
+languages = [
+             xml, sexpression, scheme, ml, prolog, clp, life, akl, oz, alice, pcurry, 
+             hasKell, pipes, e, fcp, frTime, esterel, clu, oCaml, erlang, csp, occam, 
+             pascal, c, dijkstraGCL, snobol, icon, java, cplusplus, smalltalk
             ]

@@ -2,7 +2,8 @@ module LanguageType where
 
 import ParadigmType
 
+-- Represents a programming language with its associated paradigms.
 data Language = Language {
     languageName :: String,
-    paradigms :: [Paradigm]
+    languageParadigms :: [Paradigm]
 } deriving (Eq, Show)

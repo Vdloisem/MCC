@@ -336,7 +336,6 @@ discreteSynchronousProgramming = Paradigm {
     metaParadigm = "reactive"
 }
 
--- Création de la liste de tous les paradigmes
 paradigms :: [Paradigm]
 paradigms = [
     descriptiveDeclarativeProgramming,
@@ -368,5 +367,4 @@ paradigms = [
     continuousSynchronousProgramming,
     lazyConcurrentConstraintProgramming,
     discreteSynchronousProgramming
-    -- Ajoutez d'autres paradigmes ici si nécessaire
     ]
