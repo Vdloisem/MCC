@@ -56,8 +56,8 @@ pcurry = Language "Curry" [lazyConcurrentConstraintProgramming,
                           lazyDeclarativeConcurrentProgramming,
                           nonmonotonicDataflowProgramming]
 
-hasKell :: Language
-hasKell = Language "HasKell" [lazyFunctionalProgramming,adtFunctionalProgramming]
+haskell :: Language
+haskell = Language "Haskell" [lazyFunctionalProgramming,adtFunctionalProgramming]
 
 pipes :: Language
 pipes = Language "Pipes" [monotonicDataflowProgramming]
@@ -117,7 +117,7 @@ smalltalk = Language "Smalltalk" [concurrentObjectOrientedProgramming]
 
 languages :: [Language]
 languages = [
-             xml, sexpression, scheme, ml, prolog, clp, life, akl, oz, alice, pcurry, 
-             hasKell, pipes, e, fcp, frTime, esterel, clu, oCaml, erlang, csp, occam, 
-             pascal, c, dijkstraGCL, snobol, icon, java, cplusplus, smalltalk
+             xml, scheme, ml, prolog, clp, life, akl, oz, pcurry, 
+             haskell, pipes, e, fcp, frTime, esterel, clu, oCaml, erlang, occam, 
+             c, dijkstraGCL, snobol, java
             ]
