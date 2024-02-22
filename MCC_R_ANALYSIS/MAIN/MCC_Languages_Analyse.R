@@ -1,13 +1,13 @@
-# Charger les packages nécessaires
+# Load necessary libraries for data manipulation, visualization, and reading
 library(ggplot2)
 library(dplyr)
 library(readr)
 library(gridExtra)
 
-# Lire les données depuis le fichier CSV adapté aux langages
+# Read the data from a CSV file
 data <- read_csv("language_collaboration_results.csv")
 
-# Ajustements de thème
+# Define a custom theme for ggplot2 charts for consistent appearance
 adjusted_theme <- theme(
   plot.title = element_text(size = 10),
   axis.title = element_text(size = 8),
@@ -17,20 +17,26 @@ adjusted_theme <- theme(
   legend.text = element_text(size = 6)
 )
 
-# Calculer le pourcentage de collaboration
+# Convert the 'CollaborationScore' column to a percentage for easier interpretation
 data <- data %>%
   mutate(Collaboration_Percentage = as.numeric(CollaborationScore) * 100)
 
-# Tri par Language1 et création des graphiques pour chaque langage
+# Sort the data by the first language
 data_sorted <- data %>% arrange(Language1)
+# Extract unique languages for plotting
 unique_languages <- unique(data_sorted$Language1)
+# Initialize a list to store individual graphs
 graphs <- list()
 
-seuils <- c(25.7, 56.9, 74) # Exemple de seuils de collaboration
-colors <- c("#d62728", "#ff7f0e", "#2ca02c") # Couleurs pour les seuils
+# Define thresholds and corresponding colors for visualization
+seuils <- c(25.7, 56.9, 74)
+colors <- c("#d62728", "#ff7f0e", "#2ca02c")
 
+# Loop through each unique language to create a bar plot
 for (language in unique_languages) {
+  # Filter data for the current language
   subset_data <- filter(data_sorted, Language1 == language)
+  # Create the bar plot
   graph <- ggplot(subset_data, aes(x = Language2, y = Collaboration_Percentage)) +
     geom_bar(stat = "identity", fill = "steelblue") +
     theme_minimal() +
@@ -39,15 +45,15 @@ for (language in unique_languages) {
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, by = 25))
   
-  # Ajouter des lignes horizontales pour les seuils de collaboration
+  # Add horizontal lines at defined thresholds
   for(i in 1:length(seuils)) {
     graph <- graph + geom_hline(yintercept = seuils[i], linetype = "dashed", color = colors[i])
   }
-  
+  # Store the graph in the list using the language as the key
   graphs[[language]] <- graph
 }
 
-# Sauvegarder tous les graphiques dans un seul fichier PDF
+# Output the graphs to a PDF file
 pdf("AllLanguageCollaborationReport.pdf")
 marrangeGrob(grobs = lapply(graphs, ggplotGrob), ncol = 2, nrow = 2)
 dev.off()

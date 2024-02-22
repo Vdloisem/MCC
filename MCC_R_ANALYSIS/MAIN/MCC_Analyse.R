@@ -1,13 +1,13 @@
-# Charger les packages nécessaires
+# Load necessary libraries for data visualization, manipulation, and reading
 library(ggplot2)
 library(dplyr)
 library(readr)
 library(gridExtra)
 
-# Lire les données depuis le fichier CSV
+# Read the data from a CSV file
 data <- read_csv("mc_results.csv")
 
-# Ajustements de thème
+# Define a custom theme for ggplot2 charts for consistent appearance
 adjusted_theme <- theme(
   plot.title = element_text(size = 10),
   axis.title = element_text(size = 8),
@@ -17,20 +17,26 @@ adjusted_theme <- theme(
   legend.text = element_text(size = 6)
 )
 
-# Calculer le pourcentage de TotalMC
+# Preprocess the data by converting 'TotalMC' to a percentage for visualization
 data <- data %>%
   mutate(TotalMC_Percentage = as.numeric(TotalMC) * 100)
 
-# Tri par Paradigm1 et création des graphiques pour chaque paradigme
+# Sort the data by the first paradigm for plotting
 data_sorted <- data %>% arrange(Paradigm1)
+# Extract unique paradigms for plotting
 unique_paradigms <- unique(data_sorted$Paradigm1)
+# Initialize a list to store individual graphs
 graphs <- list()
 
-seuils <- c(31.94, 52.89, 71.45) # Seuils de MC pour les types de symbiose
-colors <- c("#d62728", "#ff7f0e", "#2ca02c", "#1f77b4") # Couleurs pour les seuils
+# Define thresholds and corresponding colors for visualization
+seuils <- c(31.94, 52.89, 71.45)
+colors <- c("#d62728", "#ff7f0e", "#2ca02c", "#1f77b4")
 
+# Loop through each unique paradigm to create a bar plot
 for (paradigm in unique_paradigms) {
+  # Filter data for the current paradigm
   subset_data <- filter(data_sorted, Paradigm1 == paradigm)
+  # Create the bar plot
   graph <- ggplot(subset_data, aes(x = Paradigm2, y = TotalMC_Percentage)) +
     geom_bar(stat = "identity", fill = "steelblue") +
     theme_minimal() +
@@ -39,15 +45,15 @@ for (paradigm in unique_paradigms) {
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, by = 25))
   
-  # Ajouter des lignes horizontales pour les seuils de symbiose
+  # Add horizontal lines at defined thresholds
   for(i in 1:length(seuils)) {
     graph <- graph + geom_hline(yintercept = seuils[i], linetype = "dashed", color = colors[i])
   }
-  
+  # Store the graph in the list using the paradigm as the key
   graphs[[paradigm]] <- graph
 }
 
-# Sauvegarder tous les graphiques dans un seul fichier PDF
+# Output the graphs to a PDF file
 pdf("AllParadigmMCReport.pdf")
 marrangeGrob(grobs = lapply(graphs, ggplotGrob), ncol = 2, nrow = 2)
 dev.off()
