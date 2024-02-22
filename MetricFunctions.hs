@@ -45,26 +45,32 @@ tcFunction t1 t2 = if t1 && t2 then 1 else 0
 ndoFunction :: Bool -> Bool -> Double
 ndoFunction o1 o2 = if o1 == o2 then 1 else 0
 
--- Calculates the MC metric.
--- Takes two paradigms and calculates the MC metric, returning a formatted CSV string.
+-- Performs a pure calculation of the collaboration metric (MC) between two paradigms.
+-- This function computes a set of metrics reflecting different aspects of collaboration between two paradigms.
+calculateMCMetric :: Paradigm -> Paradigm -> (Double, Double, Double, Double, Double, Double, Double)
+calculateMCMetric p1 p2 = 
+    let (c1, c2) = (concepts p1, concepts p2)
+        (f1, f2) = (parents p1, parents p2)
+        (ch1, ch2) = (children p1, children p2)
+        (t1, t2) = (turingComplete p1, turingComplete p2)
+        (o1, o2) = (observableND p1, observableND p2)
+        (m1, m2) = (metaParadigm p1, metaParadigm p2)
+        iResult = (1/6) * iFunction c1 c2
+        r1Result = (1/6) * rFunction f1 ch2
+        r2Result = (1/6) * rFunction f2 ch1
+        mResult = (1/6) * mFunction m1 m2
+        tcResult = (1/6) * tcFunction t1 t2
+        ndoResult = (1/6) * ndoFunction o1 o2
+        mcResult = iResult + r1Result + r2Result + mResult + tcResult + ndoResult
+    in (iResult, r1Result, r2Result, mResult, tcResult, ndoResult, mcResult)
+
+-- Formats the MC metric calculation for CSV output
 mcFunctionCSV :: Paradigm -> Paradigm -> IO String
 mcFunctionCSV p1 p2 = do
-    let (c1, c2) = (concepts p1, concepts p2)
-    let (f1, f2) = (parents p1, parents p2)
-    let (ch1, ch2) = (children p1, children p2)
-    let (t1, t2) = (turingComplete p1, turingComplete p2)
-    let (o1, o2) = (observableND p1, observableND p2)
-    let (m1, m2) = (metaParadigm p1, metaParadigm p2)
-
-    let iResult = (1/6) * iFunction c1 c2
-    let r1Result = (1/6) * rFunction f1 ch2
-    let r2Result = (1/6) * rFunction f2 ch1
-    let mResult = (1/6) * mFunction m1 m2
-    let tcResult = (1/6) * tcFunction t1 t2
-    let ndoResult = (1/6) * ndoFunction o1 o2
-    let mcResult = iResult + r1Result + r2Result + mResult + tcResult + ndoResult
-
-    return $ name p1 ++ "," ++ name p2 ++ "," ++ show iResult ++ "," ++ show r1Result ++ "," ++ show r2Result ++ "," ++ show mResult ++ "," ++ show tcResult ++ "," ++ show ndoResult ++ "," ++ show mcResult
+    let (iResult, r1Result, r2Result, mResult, tcResult, ndoResult, mcResult) = calculateMCMetric p1 p2
+    return $ name p1 ++ "," ++ name p2 ++ "," ++ show iResult ++ "," ++
+             show r1Result ++ "," ++ show r2Result ++ "," ++ show mResult ++ "," ++
+             show tcResult ++ "," ++ show ndoResult ++ "," ++ show mcResult
 
 -- Modified function to calculate MC for all combinations and write to a CSV file.
 calculateMCForAllCSV :: [Paradigm] -> FilePath -> IO ()
