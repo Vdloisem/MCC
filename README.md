@@ -84,17 +84,26 @@ These functions orchestrate the metric's calculation across all paradigm or lang
 Seamlessly integrated into the project workflow, these functions are coordinated by the `main` function, which guides the calculation process from generating combinations to writing the comprehensive results to CSV files. This showcases the practical application of mathematical concepts and functional programming in software engineering research.
 
 
-## How to Use
+## For R scripts
 
 The directory `MC_Analysis_In_R/` contains R scripts that utilize the results from the Haskell implementation to provide an in-depth analysis and visualizations of the collaboration potentials between paradigms. To start the analysis, make sure you have both Haskell and R installed, then follow the specific instructions in the corresponding subfolders.
 
-## Contribution
-
-We encourage the community to contribute to this project by proposing improvements, extending the metric to other programming paradigms, or optimizing the current implementation. To contribute, please open an issue or submit a pull request.
-
 ## License
 
-This project is licensed under [insert license here]. Please see the LICENSE file for more details.
+This project is comprised of two main components: the source code and the generated data. Each component is covered by a different license to best meet the project's goals of openness, contribution, and data protection.
+
+### Source Code
+The source code of this project is licensed under the **Apache License 2.0**. This license provides you with extensive freedoms to use, modify, and distribute the code, even within commercial contexts, under the condition that the original copyright notice and license text are included in any distributions. For more details, please see the [LICENSE](LICENSE) file included with the code.
+
+In addition to the terms of the Apache License 2.0, we kindly ask for an explicit attribution whenever the project's code is used in a product or another project. This request is not legally binding under the terms of the Apache License 2.0 but is made in the hope that users will acknowledge and credit the contribution made by the original developers.
+
+### Generated Data
+The datasets produced by this project are licensed under the **Creative Commons Attribution Non-Commercial 4.0 International License (CC BY-NC 4.0)**. This license allows others to share, copy, distribute, and use the data freely, but only for non-commercial purposes and with appropriate attribution to the original creator. When using or distributing the data, please provide credit by mentioning the name of the data creator, the title of the dataset, a link to the license, and indicate if any changes were made.
+
+For detailed information on the requirements of the CC BY-NC 4.0 license, including how to provide proper attribution, please refer to the [Creative Commons website](https://creativecommons.org/licenses/by-nc/4.0/).
+
+We hope that these licensing arrangements encourage the use, sharing, and development of both the code and the data in a manner that respects and acknowledges the creators' efforts.
+
 
 ## Acknowledgments
 
