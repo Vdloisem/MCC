@@ -4,7 +4,7 @@ This project implements an innovative metric to assess the collaboration and com
 
 ## Overview of the Metric
 
-The Collaboration Metric (CM) is based on a formal mathematical definition that considers structural characteristics, parent-child relationships, as well as essential computational and behavioral properties of the paradigms. It is designed to offer a quantitative measure of compatibility and collaboration potential by assigning adjustable weights to various factors.
+The Collaboration Metric (MC) is based on a formal mathematical definition that considers structural characteristics, parent-child relationships, as well as essential computational and behavioral properties of the paradigms. It is designed to offer a quantitative measure of compatibility and collaboration potential by assigning adjustable weights to various factors.
 
 ### Metric Formulation
 
