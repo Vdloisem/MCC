@@ -36,6 +36,29 @@ MC(P_1, P_2) = α × I(C_1, C_2) + β × R(F_1, S_2) + γ × R(F_2, S_1) + δ ×
 
 Our implementation in Haskell calculates this metric by leveraging the language's capabilities to manipulate complex data structures and perform precise mathematical computations. The source code included in this repository demonstrates how we apply the metric to various programming paradigms to assess their collaboration potential.
 
+## Implementation Details
+
+The Haskell codebase is structured into several modules, each responsible for a distinct aspect of the metric calculation process:
+
+### Modules and Their Roles
+
+- **`ParadigmData` and `LanguageData`:** These modules define the programming paradigms and languages, including their characteristics such as concepts, parents, children, Turing-completeness, and observable nondeterminism.
+
+- **`ParadigmType` and `LanguageType`:** Contain type definitions for paradigms and languages. These types are used throughout the code to ensure type-safe operations on data.
+
+- **`MetricFunctions`:** Implements the core functions used to calculate the collaboration metric between paradigms. It includes functions for generating all combinations of paradigms, calculating intersections and unions of characteristics, and computing the metric based on a formal mathematical definition.
+
+- **`MetricFunctionsForLanguages`:** Extends the functionality to calculate the collaboration metric between programming languages. It leverages the paradigm data to assess collaboration potential based on the paradigms supported by each language.
+
+### Core Functionalities
+
+The metric calculation is performed through a series of pure functions that take paradigm or language characteristics as input and return quantitative assessments of their collaboration potential. Key functions include:
+
+- **`combinations`:** Generates all possible pairs of paradigms or languages for comparison.
+- **`intersection` and `union`:** Calculate the intersection and union of characteristics sets, crucial for assessing the similarity and diversity between paradigms.
+- **`calculateMCMetric`:** Computes the collaboration metric (CM) for a pair of paradigms, applying the mathematical formula based on intersection, union, and other factors like Turing-completeness and observable nondeterminism.
+- **`calculateMCForAllCSV` and `calculateLanguageCollaborationForAllCSV`:** These functions iterate over all combinations of paradigms or languages, calculate the collaboration metric for each pair, and write the results to CSV files for further analysis.
+
 ## How to Use
 
 The directory `MC_Analysis_In_R/` contains R scripts that utilize the results from the Haskell implementation to provide an in-depth analysis and visualizations of the collaboration potentials between paradigms. To start the analysis, make sure you have both Haskell and R installed, then follow the specific instructions in the corresponding subfolders.
