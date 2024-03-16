@@ -50,14 +50,39 @@ The Haskell codebase is structured into several modules, each responsible for a 
 
 - **`MetricFunctionsForLanguages`:** Extends the functionality to calculate the collaboration metric between programming languages. It leverages the paradigm data to assess collaboration potential based on the paradigms supported by each language.
 
-### Core Functionalities
+## Detailed Core Functionalities
 
-The metric calculation is performed through a series of pure functions that take paradigm or language characteristics as input and return quantitative assessments of their collaboration potential. Key functions include:
+### Generating Combinations: `combinations`
 
-- **`combinations`:** Generates all possible pairs of paradigms or languages for comparison.
-- **`intersection` and `union`:** Calculate the intersection and union of characteristics sets, crucial for assessing the similarity and diversity between paradigms.
-- **`calculateMCMetric`:** Computes the collaboration metric (CM) for a pair of paradigms, applying the mathematical formula based on intersection, union, and other factors like Turing-completeness and observable nondeterminism.
-- **`calculateMCForAllCSV` and `calculateLanguageCollaborationForAllCSV`:** These functions iterate over all combinations of paradigms or languages, calculate the collaboration metric for each pair, and write the results to CSV files for further analysis.
+This function is pivotal for the framework as it generates all possible pairs from a given list of paradigms or languages. Each pair is used as input for metric calculations, ensuring a comprehensive exploration of potential collaboration between every possible combination within the dataset.
+
+### Intersection and Union: `intersection`, `union`
+
+- **`intersection`**: Calculates the common elements between two sets of characteristics, essential for identifying conceptual overlaps. This measure of similarity can indicate potential areas for collaboration.
+- **`union`**: Amalgamates the unique elements from two sets, providing insight into the combined characteristics' diversity and complementary nature.
+
+### Calculating the Metric: `calculateMCMetric`
+
+Central to the metric calculation, this function processes two paradigms to compute the Collaboration Metric (CM) based on a sophisticated mathematical formula. Key aspects include:
+
+- **Intersection Over Union (I Function)**: Quantifies conceptual similarity.
+- **Parent-Child Relationship (R Function)**: Assesses evolutionary connections, reflecting historical influences or derivations.
+- **Meta-paradigm Compatibility (M Function)**: Evaluates shared overarching programming models or philosophies.
+- **Turing Completeness (TC Function)** and **Observable Nondeterminism (NDO Function)**: Examine fundamental computational capabilities and behaviors.
+
+This multifaceted score reflects different dimensions of potential collaboration, from conceptual similarity to functional compatibility.
+
+### Writing Results to CSV: `calculateMCForAllCSV`, `calculateLanguageCollaborationForAllCSV`
+
+These functions orchestrate the metric's calculation across all paradigm or language pairs and save the results in CSV format. This approach allows for:
+
+- **Broad Analysis**: By computing and storing metrics for every pair, it highlights areas for promising cross-paradigm integration or language interoperability.
+- **Result Sharing**: Exporting to CSV enables sharing findings with the broader community, fostering further exploration and validation.
+
+### Workflow Integration
+
+Seamlessly integrated into the project workflow, these functions are coordinated by the `main` function, which guides the calculation process from generating combinations to writing the comprehensive results to CSV files. This showcases the practical application of mathematical concepts and functional programming in software engineering research.
+
 
 ## How to Use
 
