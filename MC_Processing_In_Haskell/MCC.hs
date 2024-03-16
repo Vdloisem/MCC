@@ -8,13 +8,13 @@ import MetricFunctionsForLanguages
 main :: IO ()
 main = do
     -- Path for the CSV file where MC metric results for paradigms will be written.
-    let csvFilePath = "mc_results_test.csv"
+    let csvFilePath = "CollaborationMetric_Paradigms_Raw.csv"
     -- Calculate the MC metric for all combinations of paradigms and write the results to a CSV file.
     calculateMCForAllCSV paradigms csvFilePath
     putStrLn $ "Les résultats de MC ont été écrits dans " ++ csvFilePath
 
     -- Path for the CSV file where collaboration metric results between languages will be written.
-    let csvFilePathForLanguages = "language_collaboration_results_test.csv"
+    let csvFilePathForLanguages = "CollaborationMetric_Languages_Raw.csv"
     -- Calculate the collaboration metric for all combinations of languages and write the results to a CSV file.
     calculateLanguageCollaborationForAllCSV languages csvFilePathForLanguages
     putStrLn $ "Les résultats de collaboration entre langages ont été écrits dans " ++ csvFilePathForLanguages
