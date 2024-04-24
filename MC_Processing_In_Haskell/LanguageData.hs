@@ -60,7 +60,7 @@ haskell :: Language
 haskell = Language "Haskell" [lazyFunctionalProgramming,adtFunctionalProgramming]
 
 pipes :: Language
-pipes = Language "Pipes" [monotonicDataflowProgramming]
+pipes = Language "Pipes" [declarativeConcurrentProgramming]
 
 e :: Language
 e = Language "E" [adtFunctionalProgramming,

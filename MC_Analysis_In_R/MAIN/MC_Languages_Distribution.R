@@ -47,7 +47,6 @@ for (i in seq_along(seuils_symbiose_ajustes)) {
     annotate("text", x = seuil, y = 0.01, label = paste(round(seuil, 2), "%"), vjust = -0.5,hjust = -0.2, color = "purple", size = 3)
 }
 
-
 # Output the plot to a PDF file with specified dimensions
 pdf("LanguageCollaborationDistributionAdjustedReport.pdf", width = 11, height = 8)
 print(plot_symbiose_ajuste)

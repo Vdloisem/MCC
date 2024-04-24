@@ -29,7 +29,7 @@ unique_paradigms <- unique(data_sorted$Paradigm1)
 graphs <- list()
 
 # Define thresholds and corresponding colors for visualization
-seuils <- c(31.94, 52.89, 71.45)
+seuils <- c(31.85, 52.99, 71.31)
 colors <- c("#d62728", "#ff7f0e", "#2ca02c", "#1f77b4")
 
 # Loop through each unique paradigm to create a bar plot

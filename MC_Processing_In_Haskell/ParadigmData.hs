@@ -33,7 +33,7 @@ functionalProgramming = Paradigm {
     concepts = ["record", "procedure", "closure"],
     parents = ["first-order functional programming", "functional programming"],
     children = ["functional programming", "deterministic logic programming", "lazy functional programming", 
-                "declarative concurrent programming", "monotonic dataflow programming",  
+                "declarative concurrent programming",  
                 "continuation programming", "adt functional programming", 
                 "event loop programming", "stateful functional programming"],
     turingComplete = True,
@@ -166,23 +166,12 @@ relationalAndLogicProgramming = Paradigm {
     metaParadigm = "logic and constraint"
 }
 
-monotonicDataflowProgramming :: Paradigm
-monotonicDataflowProgramming = Paradigm {
-    name = "monotonic dataflow programming",
-    concepts = ["record", "procedure", "closure", "thread", "single assign"],
-    parents = ["functional programming","monotonic dataflow programming"],
-    children = ["monotonic dataflow programming","nonmonotonic dataflow programming", "multi agent dataflow programming"],
-    turingComplete = True,
-    observableND = False,
-    metaParadigm = "concurrent dataflow"
-}
-
 declarativeConcurrentProgramming :: Paradigm
 declarativeConcurrentProgramming = Paradigm {
     name = "declarative concurrent programming",
     concepts = ["record", "procedure", "closure", "thread", "single assign"],
     parents = ["functional programming","declarative concurrent programming"],
-    children = ["declarative concurrent programming","lazy declarative concurrent programming"],
+    children = ["declarative concurrent programming","lazy declarative concurrent programming","nonmonotonic dataflow programming", "multi agent dataflow programming"],
     turingComplete = True,
     observableND = False,
     metaParadigm = "concurrent dataflow"
@@ -259,7 +248,7 @@ nonmonotonicDataflowProgramming :: Paradigm
 nonmonotonicDataflowProgramming = Paradigm {
     name = "nonmonotonic dataflow programming",
     concepts = ["record", "procedure", "closure", "thread", "single assign", "nondet choice"],
-    parents = ["monotonic dataflow programming","nonmonotonic dataflow programming"],
+    parents = ["declarative concurrent programming","nonmonotonic dataflow programming"],
     children = ["nonmonotonic dataflow programming", "continuous synchronous programming"],
     turingComplete = True,
     observableND = True,
@@ -270,7 +259,7 @@ multiAgentDataflowProgramming :: Paradigm
 multiAgentDataflowProgramming = Paradigm {
     name = "multi agent dataflow programming",
     concepts = ["record", "procedure", "closure", "thread", "single assign", "channel"],
-    parents = ["monotonic dataflow programming","multi agent dataflow programming"],
+    parents = ["declarative concurrent programming","multi agent dataflow programming"],
     children = ["multi agent dataflow programming"],
     turingComplete = True,
     observableND = True,
@@ -352,7 +341,6 @@ paradigms = [
     imperativeSearchProgramming,
     sequentialObjectOrientedProgramming,
     relationalAndLogicProgramming,
-    monotonicDataflowProgramming,
     declarativeConcurrentProgramming,
     adtImperativeProgramming,
     multiAgentProgramming,

@@ -1,3 +1,4 @@
+# Load the required libraries for data visualization, manipulation, and reading
 library(ggplot2)
 library(dplyr)
 library(readr)
