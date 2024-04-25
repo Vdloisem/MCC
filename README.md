@@ -63,7 +63,7 @@ This function is pivotal for the framework as it generates all possible pairs fr
 
 ### Calculating the Metric: `calculateMCMetric`
 
-Central to the metric calculation, this function processes two paradigms to compute the Collaboration Metric (CM) based on a sophisticated mathematical formula. Key aspects include:
+Central to the metric calculation, this function processes two paradigms to compute the Collaboration Metric (MC) based on a sophisticated mathematical formula. Key aspects include:
 
 - **Intersection Over Union (I Function)**: Quantifies conceptual similarity.
 - **Parent-Child Relationship (R Function)**: Assesses evolutionary connections, reflecting historical influences or derivations.
